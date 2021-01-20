@@ -20,11 +20,11 @@ io.on('connection', (socket) => {
     socket.on('join', ({ username, room }) => {
         socket.join(room)
 
-        console.log(username)
-
         socket.emit('message', generateMessage('Welcome!'))
-        // To emit event to all connected sockets except the socket in which it is trigger 
-        socket.broadcast.to(room).emit('message', generateMessage(` ${username} has joined ${room}! `))
+        socket.broadcast.to(room).emit('message', generateMessage(`${username} has joined!`))
+
+        // socket.emit, io.emit, socket.broadcast.emit
+        // io.to.emit, socket.broadcast.to.emit
     })
 
     socket.on('sendMessage', (message, callback) => {
